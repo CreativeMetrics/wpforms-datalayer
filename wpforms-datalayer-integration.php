@@ -538,6 +538,26 @@ if (file_exists($puc_path)) {
 
     // Opzionale: Imposta il branch da cui pescare gli aggiornamenti (di solito 'main' o 'master')
     $myUpdateChecker->setBranch('main');
+    
+    
+    $myUpdateChecker->addResultFilter(function ($info) {
+        // Calcola l'URL di base della cartella del tuo plugin
+        $plugin_url = plugin_dir_url(__FILE__);
+        
+        // 1. Definisci le icone
+        $info->icons = array(
+            '1x' => $plugin_url . 'assets/icon-128x128.png',
+            '2x' => $plugin_url . 'assets/icon-256x256.png' // Rimuovi questa riga se non hai la versione 2x
+        );
+        
+        // 2. Definisci i banner
+        $info->banners = array(
+            '1x' => $plugin_url . 'assets/banner-772x250.jpg',
+            '2x' => $plugin_url . 'assets/banner-1544x500.jpg' // Rimuovi questa riga se non hai la versione 2x
+        );
+        
+        return $info;
+    });
 
     // Opzionale: Se la repository è PRIVATA, devi decommentare la riga sotto e inserire un Personal Access Token di GitHub
     // $myUpdateChecker->setAuthentication('tuo_token_github_qui');
