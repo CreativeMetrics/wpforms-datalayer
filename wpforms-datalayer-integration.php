@@ -3,7 +3,7 @@
  * Plugin Name: WPForms DataLayer Integration
  * Plugin URI: https://www.tuosito.com/wpforms-datalayer-integration
  * Description: Integra WPForms con il dataLayer di Google Tag Manager, consentendo di pushare gli eventi di invio del modulo con tutti i valori dei campi.
- * Version: 2.0.1
+ * Version: 2.0.2
  * Author: CreativeMetrics
  * Author URI: https://www.creativemetrics.it
  * License: GPL-2.0+
@@ -547,7 +547,7 @@ if (file_exists($puc_path)) {
         
         // 2. Definisci i banner
         $info->banners = array(
-            'default' => $plugin_url . 'assets/banner-772x250.png',
+            'default' => $plugin_url . 'assets/banner-772x250.jpg',
             '1x' => $plugin_url . 'assets/banner-772x250.jpg',
             '2x' => $plugin_url . 'assets/banner-1544x500.jpg'
         );
