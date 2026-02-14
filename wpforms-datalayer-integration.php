@@ -520,51 +520,41 @@ $wpforms_datalayer_integration = new WPForms_DataLayer_Integration();
 
 // --- INIZIO INTEGRAZIONE PLUGIN UPDATE CHECKER ---
 
-// Includi l'autoloader della libreria PUC (versione 5)
 $puc_path = plugin_dir_path(__FILE__) . 'plugin-update-checker/plugin-update-checker.php';
 
 if (file_exists($puc_path)) {
     require_once $puc_path;
 
-    // Usa il namespace della v5
-    use YahnisElsts\PluginUpdateChecker\v5\PucFactory;
-
-    // Sostituisci 'tuo-username' e 'nome-repo' con i dati reali della tua repository GitHub
-    $myUpdateChecker = PucFactory::buildUpdateChecker(
-        'https://github.com/CreativeMetrics/wpforms-datalayer/',
+    // FIX: Richiamo il namespace completo direttamente qui senza usare "use"
+    $myUpdateChecker = \YahnisElsts\PluginUpdateChecker\v5\PucFactory::buildUpdateChecker(
+        'https://github.com/CreativeMetrics/wpforms-datalayer',
         __FILE__,
         'wpforms-datalayer-integration'
     );
 
-    // Opzionale: Imposta il branch da cui pescare gli aggiornamenti (di solito 'main' o 'master')
     $myUpdateChecker->setBranch('main');
-    
-    
+
+    // AGGIUNTA ICONA E BANNER
     $myUpdateChecker->addResultFilter(function ($info) {
-        // Calcola l'URL di base della cartella del tuo plugin
         $plugin_url = plugin_dir_url(__FILE__);
         
         // 1. Definisci le icone
         $info->icons = array(
             '1x' => $plugin_url . 'assets/icon-128x128.png',
-            '2x' => $plugin_url . 'assets/icon-256x256.png' // Rimuovi questa riga se non hai la versione 2x
+            '2x' => $plugin_url . 'assets/icon-256x256.png'
         );
         
         // 2. Definisci i banner
         $info->banners = array(
             '1x' => $plugin_url . 'assets/banner-772x250.jpg',
-            '2x' => $plugin_url . 'assets/banner-1544x500.jpg' // Rimuovi questa riga se non hai la versione 2x
+            '2x' => $plugin_url . 'assets/banner-1544x500.jpg'
         );
         
         return $info;
     });
-
-    // Opzionale: Se la repository è PRIVATA, devi decommentare la riga sotto e inserire un Personal Access Token di GitHub
-    // $myUpdateChecker->setAuthentication('tuo_token_github_qui');
 }
 
 // --- FINE INTEGRAZIONE PLUGIN UPDATE CHECKER ---
-
 
 
 
